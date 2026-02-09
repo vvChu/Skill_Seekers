@@ -677,7 +677,7 @@ async def extract_config_patterns(
 
 
 @safe_tool_decorator(
-    description="Package skill directory into platform-specific format (ZIP for Claude/OpenAI/Markdown, tar.gz for Gemini). Supports all platforms: claude, gemini, openai, markdown. Automatically uploads if platform API key is set."
+    description="Package skill directory into platform-specific format (ZIP for Claude/OpenAI/Markdown, tar.gz for Gemini/Antigravity). Supports all platforms: claude, gemini, openai, antigravity, markdown. Automatically uploads if platform API key is set."
 )
 async def package_skill(
     skill_dir: str,
@@ -689,7 +689,7 @@ async def package_skill(
 
     Args:
         skill_dir: Path to skill directory to package (e.g., output/react/)
-        target: Target platform (default: 'claude'). Options: claude, gemini, openai, markdown
+        target: Target platform (default: 'claude'). Options: claude, gemini, openai, antigravity, markdown
         auto_upload: Auto-upload after packaging if API key is available (default: true). Requires platform-specific API key: ANTHROPIC_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY.
 
     Returns:
@@ -707,7 +707,7 @@ async def package_skill(
 
 
 @safe_tool_decorator(
-    description="Upload skill package to target LLM platform API. Requires platform-specific API key. Supports: claude (Anthropic Skills API), gemini (Google Files API), openai (Assistants API). Does NOT support markdown."
+    description="Upload skill package to target LLM platform API. Requires platform-specific API key. Supports: claude (Anthropic Skills API), gemini (Google Files API), openai (Assistants API), antigravity (Google Files API). Does NOT support markdown."
 )
 async def upload_skill(
     skill_zip: str,
@@ -719,7 +719,7 @@ async def upload_skill(
 
     Args:
         skill_zip: Path to skill package (.zip or .tar.gz, e.g., output/react.zip)
-        target: Target platform (default: 'claude'). Options: claude, gemini, openai
+        target: Target platform (default: 'claude'). Options: claude, gemini, openai, antigravity
         api_key: Optional API key (uses env var if not provided: ANTHROPIC_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY)
 
     Returns:
@@ -752,7 +752,7 @@ async def enhance_skill(
 
     Args:
         skill_dir: Path to skill directory containing SKILL.md (e.g., output/react/)
-        target: Target platform (default: 'claude'). Options: claude, gemini, openai
+        target: Target platform (default: 'claude'). Options: claude, gemini, openai, antigravity
         mode: Enhancement mode (default: 'local'). Options: local (Claude Code, no API), api (uses platform API)
         api_key: Optional API key for 'api' mode (uses env var if not provided: ANTHROPIC_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY)
 
@@ -795,7 +795,7 @@ async def install_skill(
         auto_upload: Auto-upload after packaging (requires platform API key). Default: true. Set to false to skip upload.
         unlimited: Remove page limits during scraping (default: false). WARNING: Can take hours for large sites.
         dry_run: Preview workflow without executing (default: false). Shows all phases that would run.
-        target: Target LLM platform (default: 'claude'). Options: claude, gemini, openai, markdown. Requires corresponding API key: ANTHROPIC_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY.
+        target: Target LLM platform (default: 'claude'). Options: claude, gemini, openai, antigravity, markdown. Requires corresponding API key: ANTHROPIC_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY.
 
     Returns:
         Workflow results with all phase statuses.
