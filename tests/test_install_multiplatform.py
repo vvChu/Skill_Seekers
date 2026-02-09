@@ -24,11 +24,11 @@ class TestInstallCLI(unittest.TestCase):
             parser = argparse.ArgumentParser()
             parser.add_argument("--config", required=True)
             parser.add_argument(
-                "--target", choices=["claude", "gemini", "openai", "markdown"], default="claude"
+                "--target", choices=["claude", "gemini", "openai", "antigravity", "markdown"], default="claude"
             )
 
             # Test that each platform is accepted
-            for platform in ["claude", "gemini", "openai", "markdown"]:
+            for platform in ["claude", "gemini", "openai", "antigravity", "markdown"]:
                 args = parser.parse_args(["--config", "test", "--target", platform])
                 self.assertEqual(args.target, platform)
 
@@ -46,7 +46,7 @@ class TestInstallCLI(unittest.TestCase):
         parser = argparse.ArgumentParser()
         parser.add_argument("--config", required=True)
         parser.add_argument(
-            "--target", choices=["claude", "gemini", "openai", "markdown"], default="claude"
+            "--target", choices=["claude", "gemini", "openai", "antigravity", "markdown"], default="claude"
         )
 
         # Should raise SystemExit for invalid target
@@ -63,7 +63,7 @@ class TestInstallToolMultiPlatform(unittest.IsolatedAsyncioTestCase):
 
         # Just test dry_run mode which doesn't need mocking all internal tools
         # Test with each platform
-        for target in ["claude", "gemini", "openai"]:
+        for target in ["claude", "gemini", "openai", "antigravity"]:
             # Use dry_run=True which skips actual execution
             # It will still show us the platform is being recognized
             with (
@@ -91,7 +91,7 @@ class TestInstallToolMultiPlatform(unittest.IsolatedAsyncioTestCase):
         from skill_seekers.cli.adaptors import get_adaptor
 
         # Test that each platform creates the right adaptor
-        for target in ["claude", "gemini", "openai", "markdown"]:
+        for target in ["claude", "gemini", "openai", "antigravity", "markdown"]:
             adaptor = get_adaptor(target)
             self.assertEqual(adaptor.PLATFORM, target)
 
@@ -108,6 +108,10 @@ class TestInstallToolMultiPlatform(unittest.IsolatedAsyncioTestCase):
 
         openai_adaptor = get_adaptor("openai")
         self.assertEqual(openai_adaptor.get_env_var_name(), "OPENAI_API_KEY")
+
+        antigravity_adaptor = get_adaptor("antigravity")
+        # Antigravity uses GOOGLE_API_KEY (shared with Gemini)
+        self.assertEqual(antigravity_adaptor.get_env_var_name(), "GOOGLE_API_KEY")
 
         markdown_adaptor = get_adaptor("markdown")
         # Markdown doesn't need an API key, but should still have a method
@@ -126,6 +130,7 @@ class TestInstallWorkflowIntegration(unittest.IsolatedAsyncioTestCase):
             "claude": "Claude AI (Anthropic)",
             "gemini": "Google Gemini",
             "openai": "OpenAI ChatGPT",
+            "antigravity": "Google Antigravity",
             "markdown": "Generic Markdown (Universal)",
         }
 
