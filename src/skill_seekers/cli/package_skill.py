@@ -226,6 +226,7 @@ Examples:
             "claude",
             "gemini",
             "openai",
+            "antigravity",
             "markdown",
             "langchain",
             "llama-index",
