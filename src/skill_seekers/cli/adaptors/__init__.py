@@ -25,6 +25,11 @@ except ImportError:
     OpenAIAdaptor = None
 
 try:
+    from .antigravity import AntigravityAdaptor
+except ImportError:
+    AntigravityAdaptor = None
+
+try:
     from .markdown import MarkdownAdaptor
 except ImportError:
     MarkdownAdaptor = None
@@ -75,6 +80,8 @@ if GeminiAdaptor:
     ADAPTORS["gemini"] = GeminiAdaptor
 if OpenAIAdaptor:
     ADAPTORS["openai"] = OpenAIAdaptor
+if AntigravityAdaptor:
+    ADAPTORS["antigravity"] = AntigravityAdaptor
 if MarkdownAdaptor:
     ADAPTORS["markdown"] = MarkdownAdaptor
 if LangChainAdaptor:

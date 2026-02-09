@@ -50,6 +50,7 @@ skill-seekers package output/react --target langchain  # or llama-index, pinecon
 | **Claude AI** | Skills (ZIP) | Claude Code skills | Default |
 | **Gemini** | tar.gz | Google Gemini skills | `--target gemini` |
 | **OpenAI** | ChatGPT format | Custom GPTs | `--target openai` |
+| **Antigravity** | tar.gz + Agent | Agent-first AI IDE | `--target antigravity` |
 
 **Why Skill Seekers for RAG?**
 
@@ -165,7 +166,7 @@ Instead of spending days on manual preprocessing, Skill Seeker:
 - ✅ **Backward Compatible** - Legacy single-source configs still work
 
 ### 🤖 Multi-LLM Platform Support (**NEW - v2.5.0**)
-- ✅ **4 LLM Platforms** - Claude AI, Google Gemini, OpenAI ChatGPT, Generic Markdown
+- ✅ **5 LLM Platforms** - Claude AI, Google Gemini, OpenAI ChatGPT, Google Antigravity, Generic Markdown
 - ✅ **Universal Scraping** - Same documentation works for all platforms
 - ✅ **Platform-Specific Packaging** - Optimized formats for each LLM
 - ✅ **One-Command Export** - `--target` flag selects platform
@@ -177,6 +178,7 @@ Instead of spending days on manual preprocessing, Skill Seeker:
 | **Claude AI** | ZIP + YAML | ✅ Auto | ✅ Yes | ANTHROPIC_API_KEY | ANTHROPIC_BASE_URL |
 | **Google Gemini** | tar.gz | ✅ Auto | ✅ Yes | GOOGLE_API_KEY | - |
 | **OpenAI ChatGPT** | ZIP + Vector Store | ✅ Auto | ✅ Yes | OPENAI_API_KEY | - |
+| **Google Antigravity** | tar.gz + Agent | ✅ Auto | ✅ Yes | GOOGLE_API_KEY | - |
 | **Generic Markdown** | ZIP | ❌ Manual | ❌ No | - | - |
 
 ```bash
@@ -188,6 +190,11 @@ skill-seekers upload react.zip
 pip install skill-seekers[gemini]
 skill-seekers package output/react/ --target gemini
 skill-seekers upload react-gemini.tar.gz --target gemini
+
+# Google Antigravity (agent-first AI IDE)
+pip install skill-seekers[gemini]  # Uses same dependency as Gemini
+skill-seekers package output/react/ --target antigravity
+skill-seekers upload react-antigravity.tar.gz --target antigravity
 
 # OpenAI ChatGPT
 pip install skill-seekers[openai]
@@ -743,21 +750,21 @@ skill-seekers install --config react
 
 ## 📊 Feature Matrix
 
-Skill Seekers supports **4 platforms** and **5 skill modes** with full feature parity.
+Skill Seekers supports **5 platforms** and **5 skill modes** with full feature parity.
 
-**Platforms:** Claude AI, Google Gemini, OpenAI ChatGPT, Generic Markdown
+**Platforms:** Claude AI, Google Gemini, OpenAI ChatGPT, Google Antigravity, Generic Markdown
 **Skill Modes:** Documentation, GitHub, PDF, Unified Multi-Source, Local Repository
 
 See [Complete Feature Matrix](docs/FEATURE_MATRIX.md) for detailed platform and feature support.
 
 ### Quick Platform Comparison
 
-| Feature | Claude | Gemini | OpenAI | Markdown |
-|---------|--------|--------|--------|----------|
-| Format | ZIP + YAML | tar.gz | ZIP + Vector | ZIP |
-| Upload | ✅ API | ✅ API | ✅ API | ❌ Manual |
-| Enhancement | ✅ Sonnet 4 | ✅ 2.0 Flash | ✅ GPT-4o | ❌ None |
-| All Skill Modes | ✅ | ✅ | ✅ | ✅ |
+| Feature | Claude | Gemini | OpenAI | Antigravity | Markdown |
+|---------|--------|--------|--------|-------------|----------|
+| Format | ZIP + YAML | tar.gz | ZIP + Vector | tar.gz + Agent | ZIP |
+| Upload | ✅ API | ✅ API | ✅ API | ✅ API | ❌ Manual |
+| Enhancement | ✅ Sonnet 4 | ✅ 2.0 Flash | ✅ GPT-4o | ✅ 2.0 Flash | ❌ None |
+| All Skill Modes | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 **Examples:**
 ```bash
@@ -765,11 +772,13 @@ See [Complete Feature Matrix](docs/FEATURE_MATRIX.md) for detailed platform and 
 skill-seekers package output/react/ --target claude
 skill-seekers package output/react/ --target gemini
 skill-seekers package output/react/ --target openai
+skill-seekers package output/react/ --target antigravity
 skill-seekers package output/react/ --target markdown
 
 # Install for specific platform
 skill-seekers install --config django --target gemini
 skill-seekers install --config fastapi --target openai
+skill-seekers install --config react --target antigravity
 ```
 
 ---

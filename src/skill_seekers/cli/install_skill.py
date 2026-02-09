@@ -123,7 +123,7 @@ Phases:
 
     parser.add_argument(
         "--target",
-        choices=["claude", "gemini", "openai", "markdown"],
+        choices=["claude", "gemini", "openai", "antigravity", "markdown"],
         default="claude",
         help="Target LLM platform (default: claude)",
     )

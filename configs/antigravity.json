@@ -1,0 +1,30 @@
+{
+  "name": "antigravity",
+  "description": "Google Antigravity AI IDE - agent-first development platform with Gemini 3. Use this skill when working with Antigravity agents, artifacts, multi-surface workflows, skills authoring, or agent configuration.",
+  "sources": [
+    {
+      "type": "documentation",
+      "base_url": "https://antigravity.google/docs",
+      "max_pages": 500,
+      "rate_limit": 0.5,
+      "selectors": {
+        "content": "article, main, .docs-content",
+        "title": "h1, .page-title"
+      },
+      "url_patterns": {
+        "include": ["/docs"],
+        "exclude": ["/blog", "/changelog"]
+      }
+    }
+  ],
+  "categories": {
+    "getting_started": ["intro", "quickstart", "tutorial", "getting-started"],
+    "agent_concepts": ["agent", "autonomous", "planning", "execution", "verification"],
+    "skills": ["skill", "extension", "markdown", "authoring"],
+    "artifacts": ["artifact", "output", "task-list", "plan", "diff"],
+    "multi_surface": ["editor", "terminal", "browser", "surface", "workflow"],
+    "api": ["api", "reference", "endpoint"],
+    "configuration": ["config", "settings", "agents.md", "gemini.md"],
+    "examples": ["example", "sample", "demo", "use-case"]
+  }
+}
